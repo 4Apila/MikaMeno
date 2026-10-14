@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lisää tapahtuma</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<h1>Lisää tapahtuma</h1>
+    <form action="#" th:action="@{/lisaaTapahtuma}" th:object="${tapahtuma}" method="post">
+    	<table>
+    	<tr>
+    		<td>Tapahtuman alkupäivä ja alkuaika <input type="datetime-local" th:field="*{alkupv}" /></td>
+            <td th:if="${#fields.hasErrors('alkupv')}" th:errors="*{alkupv}">Virhe</td>
+        </tr>
+        <tr>
+        	<td>Tapahtuman loppupäivä ja loppumisaika <input type="datetime-local" th:field="*{loppupv}" /></td>
+        	<td th:if="${#fields.hasErrors('loppupv')}" th:errors="*{loppupv}">Virhe</td>
+        </tr>
+        <tr>
+        	<td>Syötä tapahtumapaikka <input type="text" th:field="*{paikka}" /></td>
+        	<td th:if="${#fields.hasErrors('paikka')}" th:errors="*{paikka}">Virhe</td>
+        </tr>
+        <tr>
+        	<td>Syötä tapahtuman kuvaus <input type="text" th:field="*{kuvaus}" /></td>
+        	<td th:if="${#fields.hasErrors('kuvaus')}" th:errors="*{kuvaus}">Virhe</td>
+        </tr>
+        </table>
+        <p><input type="submit" value="Submit" /></p>
+    </form>
+</body>
+</html>
