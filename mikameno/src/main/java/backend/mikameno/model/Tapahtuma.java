@@ -10,6 +10,9 @@ public class Tapahtuma {
 
     private Long id;
 
+    @Size(min=1, max=50, message = "Syötä kelvollinen nimi tapahtumalle. Nimen maksimipituus on 50 merkkiä")
+    String nimi;
+
     @NotNull(message = "Syötä tapahtuman alkupäivä")
     @FutureOrPresent(message = "Alkupäivä ei voi olla menneisyydessä")
     private LocalDateTime alkupv;
@@ -25,7 +28,10 @@ public class Tapahtuma {
     @Size(min=1, max=1000, message = "Tapahtuman kuvaus voi olla enintään 1000 merkkiä pitkä")
     private String kuvaus;
 
-    private List<Kayttaja> kayttajat;
+    @Min(value = 1, message ="Syötä positiivinen luku. Mikäli maksimiosallistujamäärää ei ole, jätä kenttä tyhjäksi")
+    private Integer maxOsallistujat;
+
+    private List<Kayttaja> osallistujat;
 
     private Kayttaja jarjestaja;
     
@@ -34,13 +40,13 @@ public class Tapahtuma {
     }
 
     public Tapahtuma(Long id, LocalDateTime alkupv, LocalDateTime loppupv, 
-            String paikka, String kuvaus, List<Kayttaja> kayttajat, Kayttaja jarjestaja) {
+            String paikka, String kuvaus, List<Kayttaja> osallistujat, Kayttaja jarjestaja) {
         this.id = id;
         this.alkupv = alkupv;
         this.loppupv = loppupv;
         this.paikka = paikka;
         this.kuvaus = kuvaus;
-        this.kayttajat = kayttajat;
+        this.osallistujat = osallistujat;
         this.jarjestaja = jarjestaja;
     }
 
@@ -49,6 +55,12 @@ public class Tapahtuma {
     }
     public void setId(Long id) {
         this.id = id;
+    }
+    public String getNimi() {
+        return nimi;
+    }
+    public void setNimi(String nimi) {
+        this.nimi = nimi;
     }
     public LocalDateTime getAlkupv() {
         return alkupv;
@@ -76,11 +88,20 @@ public class Tapahtuma {
     public void setKuvaus(String kuvaus) {
         this.kuvaus = kuvaus;
     }
-    public List<Kayttaja> getKayttajat() {
-        return kayttajat;
+    public List<Kayttaja> getOsallistujat() {
+        return osallistujat;
     }
-    public void setKayttajat(List<Kayttaja> kayttajat) {
-        this.kayttajat = kayttajat;
+    public void setOsallistujat(List<Kayttaja> osallistujat) {
+        this.osallistujat = osallistujat;
+    }
+    public void addOsallistuja(Kayttaja osallistuja) {
+        osallistujat.add(osallistuja);
+    }
+    public void setMaxOsallistujat(Integer max) {
+        this.maxOsallistujat = max;
+    }
+    public Integer getMaxOsallistujat() {
+        return this.maxOsallistujat;
     }
     public Kayttaja getJarjestaja() {
         return jarjestaja;

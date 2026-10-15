@@ -1,13 +1,29 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-	<head>
-		<title>Mikä Meno?</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	</head>
-	<body>
-		<h1>Mikä Meno?</h1>
-        <p>Esittelyteksti</p>
-        <p>Kirjaudu sisään -linkki</p>
-        <p>Katso tapahtumia -linkki, joka vie /tapahtuma/{id}</p>
-	</body>
+
+<head>
+	<title>Mikä Meno?</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+	<h1>Mikä Meno?</h1>
+	<p>Esittelyteksti</p>
+	<p>Kirjaudu sisään -linkki</p>
+	<p>Katso tapahtumia -linkki, joka vie /tapahtuma/{id}</p>
+	<a href="lisaaTapahtuma">Lisää tapahtuma</a>
+
+	<div>
+		<h3>Tapahtumalistaus</h3>
+		 <table> <!-- Ei vielä näytä mitään, koska tapahtumassa ei ole tietokantaa jossa olisi tapahtumia. -->
+			<tr th:each="tapahtuma: ${tapahtumat}">
+				<td th:text="${tapahtuma.nimi}">Tapahtuman nimi</td>
+				<td th:text="${tapahtuma.alkupv}">Tapahtuman alkupäivä ja -aika</td>
+				<td th:text="${tapahtuma.kuvaus}">Tapahtuman kuvaus</td>
+				<td th:text="${tapahtuma.paikka}">Tapahtumapaikka</td>
+			</tr>
+		</table>
+	</div>
+</body>
+
 </html>
