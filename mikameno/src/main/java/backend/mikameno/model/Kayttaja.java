@@ -1,10 +1,14 @@
 package backend.mikameno.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 
+@Entity
 public class Kayttaja {
 
+    @Id
     @NotBlank
     private String kayttajatunnus;
 

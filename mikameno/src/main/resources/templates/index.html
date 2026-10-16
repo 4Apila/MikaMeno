@@ -18,7 +18,7 @@
 		 <table> <!-- Ei vielä näytä mitään, koska tapahtumassa ei ole tietokantaa jossa olisi tapahtumia. -->
 			<tr th:each="tapahtuma: ${tapahtumat}">
 				<td th:text="${tapahtuma.nimi}">Tapahtuman nimi</td>
-				<td th:text="${tapahtuma.alkupv}">Tapahtuman alkupäivä ja -aika</td>
+				<td th:text="${#temporals.format(tapahtuma.alkupv, 'dd.MM.yyyy HH:mm')}">Tapahtuman alkupäivä ja -aika</td>
 				<td th:text="${tapahtuma.kuvaus}">Tapahtuman kuvaus</td>
 				<td th:text="${tapahtuma.paikka}">Tapahtumapaikka</td>
 			</tr>

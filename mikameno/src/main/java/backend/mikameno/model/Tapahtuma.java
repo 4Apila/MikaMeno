@@ -3,11 +3,19 @@ package backend.mikameno.model;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.*;
 
-
+@Entity
 public class Tapahtuma {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Size(min=1, max=50, message = "Syötä kelvollinen nimi tapahtumalle. Nimen maksimipituus on 50 merkkiä")
@@ -31,23 +39,33 @@ public class Tapahtuma {
     @Min(value = 1, message ="Syötä positiivinen luku. Mikäli maksimiosallistujamäärää ei ole, jätä kenttä tyhjäksi")
     private Integer maxOsallistujat;
 
+    @ManyToMany 
     private List<Kayttaja> osallistujat;
 
+    @ManyToOne
     private Kayttaja jarjestaja;
     
     public Tapahtuma() {
 
     }
 
-    public Tapahtuma(Long id, LocalDateTime alkupv, LocalDateTime loppupv, 
-            String paikka, String kuvaus, List<Kayttaja> osallistujat, Kayttaja jarjestaja) {
-        this.id = id;
+    public Tapahtuma(String nimi, LocalDateTime alkupv, LocalDateTime loppupv, 
+            String paikka, String kuvaus) {
+        this.nimi = nimi;
         this.alkupv = alkupv;
         this.loppupv = loppupv;
         this.paikka = paikka;
         this.kuvaus = kuvaus;
-        this.osallistujat = osallistujat;
-        this.jarjestaja = jarjestaja;
+    }
+
+    public Tapahtuma(String nimi, LocalDateTime alkupv, LocalDateTime loppupv, 
+            String paikka, String kuvaus, Integer maxOsallistujat) {
+        this.nimi = nimi;
+        this.alkupv = alkupv;
+        this.loppupv = loppupv;
+        this.paikka = paikka;
+        this.kuvaus = kuvaus;
+        this.maxOsallistujat = maxOsallistujat;
     }
 
     public Long getId() {

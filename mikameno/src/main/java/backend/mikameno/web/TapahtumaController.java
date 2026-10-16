@@ -1,27 +1,30 @@
 package backend.mikameno.web;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 
 import backend.mikameno.model.Tapahtuma;
+import backend.mikameno.repository.TapahtumaRepository;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Controller
 public class TapahtumaController {
-    List<Tapahtuma> tapahtumat = new ArrayList<Tapahtuma>();
+    private TapahtumaRepository tr;
+	
+    // Välittää repositoryn
+	public TapahtumaController(TapahtumaRepository tr) {
+		this.tr = tr;
+	}
 
     @GetMapping("/")
     public String naytaEtusivu(Model model) {
-        model.addAttribute("tapahtumat", tapahtumat);
+        model.addAttribute("tapahtumat",tr.findAll());
         return "index";
     }
 
@@ -38,7 +41,7 @@ public class TapahtumaController {
             return "lisaaTapahtuma";
         }
         model.addAttribute("tapahtuma", tapahtuma);
-        tapahtumat.add(tapahtuma);
+        tr.save(tapahtuma);
         return "redirect:/";
     }
 
