@@ -3,6 +3,8 @@ package backend.mikameno.model;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -42,10 +44,12 @@ public class Tapahtuma {
     private Integer maxOsallistujat;
 
     @ManyToMany
+    //@JsonIgnore
     private List<Kayttaja> osallistujat;
 
     @ManyToOne
     @JoinColumn(name = "kayttajatunnus")
+    //@JsonIgnore
     private Kayttaja jarjestaja;
     
     public Tapahtuma() {

@@ -23,7 +23,7 @@
         </p>
         <p>
             Tapahtuman enimmäiskoko:
-            <span th:text="${tapahtuma.maxOsallistujat}">Tapahtuman enimmäiskoko</span>
+            <span th:text="${tapahtuma.maxOsallistujat} ?: 'Ei osallistujarajoitusta' ">Tapahtuman enimmäiskoko</span>
         </p>
         <p>
             Tapahtuman järjestää: 
