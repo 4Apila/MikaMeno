@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Mikä Meno?</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+    <h1>Mikä Meno?</h1>
+    <h2 th:text="${tapahtuma.nimi}">Tapahtuman nimi</h2>
+    <div>
+        <p>
+            Ajankohta:
+            <span th:text="${#temporals.format(tapahtuma.alkupv, 'dd.MM.yyyy HH:mm')}"></span>
+            -
+            <span th:text="${#temporals.format(tapahtuma.loppupv, 'dd.MM.yyyy HH:mm')}"></span>
+        </p>
+        <span th:text="${tapahtuma.kuvaus}">Tapahtuman kuvaus</span>
+        <p>
+            Tapahtumapaikka:
+            <span th:text="${tapahtuma.paikka}">Tapahtumapaikka</span>
+        </p>
+        <p>
+            Tapahtuman enimmäiskoko:
+            <span th:text="${tapahtuma.maxOsallistujat}">Tapahtuman enimmäiskoko</span>
+        </p>
+        <p>
+            Tapahtuman järjestää
+            <span th:text="${tapahtuma.jarjestaja}"></span>
+        </p>
+
+        <a th:href="@{/tapahtuma/{id}/edit(id=${tapahtuma.id})}">Muokkaa</a>
+        <a th:href="@{/tapahtuma/{id}/delete(id=${tapahtuma.id})}">Delete</a>
+    </div>
+</body>
+
+</html>

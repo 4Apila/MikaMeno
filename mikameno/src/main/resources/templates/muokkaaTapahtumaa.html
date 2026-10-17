@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Muokkaa tapahtumaa</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+    <p>Muokkaa tapahtumaa <span th:text="${tapahtuma.nimi}"></span></p>
+        <form th:object="${tapahtuma}" th:action="@{/tapahtuma/{id}/edit(id=${tapahtuma.id})}" method="post">
+            <table>
+                <tr>
+                    <td for="nimi">Nimi
+                        <input type="text" id="nimi" th:field="*{nimi}" />
+                    </td>
+                    <td th:if="${#fields.hasErrors('nimi')}" th:errors="*{nimi}">Virhe</td>
+                </tr>
+
+                <tr>
+                    <td for="alkupv">Alkamispäivä ja alkuaika
+                        <input type="datetime-local" id="alkupv" th:field="*{alkupv}" />
+                    </td>
+                    <td th:if="${#fields.hasErrors('alkupv')}" th:errors="*{alkupv}">Virhe</td>
+                </tr>
+
+                <tr>
+                    <td for="loppupv">Loppumispäivä ja loppuaika
+                        <input type="datetime-local" th:field="*{loppupv}" />
+                    </td>
+                    <td th:if="${#fields.hasErrors('loppupv')}" th:errors="*{loppupv}">Virhe</td>
+                </tr>
+
+                <tr>
+                    <td for="kuvaus">Kuvaus
+                        <input type="text" th:field="*{kuvaus}" />
+                    </td>
+                    <td th:if="${#fields.hasErrors('kuvaus')}" th:errors="*{kuvaus}">Virhe</td>
+                </tr>
+
+                <tr>
+                    <td for="paikka">Paikka
+                        <input type="text" th:field="*{paikka}" />
+                    </td>
+                    <td th:if="${#fields.hasErrors('paikka')}" th:errors="*{paikka}">Virhe</td>
+                </tr>
+
+                <tr>
+                    <td for="maxOsallistujat">Maksimiosallistujat
+                        <input type="text" th:field="*{maxOsallistujat}" />
+                    </td>
+                    <td th:if="${#fields.hasErrors('maxOsallistujat')}" th:errors="*{maxOsallistujat}">Virhe</td>
+                </tr>
+
+            </table>
+            <input type="submit" value="Tallenna muutokset"></input>
+        </form>
+</body>
+
+</html>
