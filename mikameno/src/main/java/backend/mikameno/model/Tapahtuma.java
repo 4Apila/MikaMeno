@@ -7,8 +7,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.*;
 
 @Entity
@@ -39,10 +41,11 @@ public class Tapahtuma {
     @Min(value = 1, message ="Syötä positiivinen luku. Mikäli maksimiosallistujamäärää ei ole, jätä kenttä tyhjäksi")
     private Integer maxOsallistujat;
 
-    @ManyToMany 
+    @ManyToMany
     private List<Kayttaja> osallistujat;
 
     @ManyToOne
+    @JoinColumn(name = "kayttajatunnus")
     private Kayttaja jarjestaja;
     
     public Tapahtuma() {

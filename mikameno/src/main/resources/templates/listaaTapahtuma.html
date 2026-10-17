@@ -26,8 +26,17 @@
             <span th:text="${tapahtuma.maxOsallistujat}">Tapahtuman enimmäiskoko</span>
         </p>
         <p>
-            Tapahtuman järjestää
+            Tapahtuman järjestää: 
             <span th:text="${tapahtuma.jarjestaja}"></span>
+        </p>
+
+        <p>
+            Osallistujat:
+            <table>
+			<tr th:each="osallistuja: ${tapahtuma.Osallistujat}">
+				<td th:text="${osallistuja.kayttajatunnus}">Osallistujan nimi</td>
+			</tr>
+		</table>
         </p>
 
         <a th:href="@{/tapahtuma/{id}/edit(id=${tapahtuma.id})}">Muokkaa</a>
