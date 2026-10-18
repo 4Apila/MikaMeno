@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
 <head>
     <title>Lisää tapahtuma</title>
@@ -37,6 +37,8 @@
         </table>
         <p><input type="submit" value="Tallenna" /></p>
     </form>
+
+    <a th:href="@{/}">Peruuta</a>
 </body>
 
 </html>

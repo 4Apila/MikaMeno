@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
 <head>
     <title>Muokkaa tapahtumaa</title>
@@ -55,6 +55,8 @@
             </table>
             <input type="submit" value="Tallenna muutokset"></input>
         </form>
+
+        <a th:href="@{/tapahtuma/{id}(id=${tapahtuma.id})}">Peruuta</a>
 </body>
 
 </html>
