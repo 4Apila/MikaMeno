@@ -30,17 +30,20 @@ public class WebSecurityConfig {
 						.requestMatchers("/tapahtuma/*").permitAll()
 						.requestMatchers(HttpMethod.GET, "/api/tapahtumat").permitAll()
 						.requestMatchers("/h2-console/**").permitAll()
+						.requestMatchers(HttpMethod.GET, "/api/tapahtuma/**").permitAll()
+						.requestMatchers(HttpMethod.POST, "/api/**").hasAnyAuthority("ADMIN", "USER")
+						.requestMatchers(HttpMethod.PUT, "/api/**").hasAuthority("ADMIN")
+						.requestMatchers(HttpMethod.DELETE, "/api/**").hasAuthority("ADMIN")
 						.anyRequest().authenticated())
 				.formLogin(formlogin -> formlogin
 						//.loginPage("/login") vain jos on oma login-sivu
 						.defaultSuccessUrl("/", true)
 						.permitAll())
+				.httpBasic(Customizer.withDefaults())
 				.headers(headers -> headers.frameOptions(frameOptions -> frameOptions
                                                 .disable())) // h2-console
 				.logout(logout -> logout
 						.permitAll());
-
-				// .httpBasic(Customizer.withDefaults()); // Postman, mutta miksi ei toimi?
 
 		return http.build();
 	}

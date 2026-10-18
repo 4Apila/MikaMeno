@@ -44,12 +44,12 @@ public class Tapahtuma {
     private Integer maxOsallistujat;
 
     @ManyToMany
-    //@JsonIgnore
+    @JsonIgnore
     private List<Kayttaja> osallistujat;
 
     @ManyToOne
     @JoinColumn(name = "kayttajatunnus")
-    //@JsonIgnore
+    @JsonIgnore
     private Kayttaja jarjestaja;
     
     public Tapahtuma() {
