@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
 <head>
     <title>Mikä Meno?</title>
@@ -26,22 +26,43 @@
             <span th:text="${tapahtuma.maxOsallistujat} ?: 'Ei osallistujarajoitusta' ">Tapahtuman enimmäiskoko</span>
         </p>
         <p>
-            Tapahtuman järjestää: 
-            <span th:text="${tapahtuma.jarjestaja}"></span>
+            Tapahtuman järjestää:
+            <span th:text="${tapahtuma.jarjestaja.kayttajatunnus}"></span>
         </p>
 
         <p>
             Osallistujat:
-            <table>
-			<tr th:each="osallistuja: ${tapahtuma.Osallistujat}">
-				<td th:text="${osallistuja.kayttajatunnus}">Osallistujan nimi</td>
-			</tr>
-		</table>
+        <table>
+            <tr th:each="osallistuja: ${tapahtuma.Osallistujat}">
+                <td th:text="${osallistuja.kayttajatunnus}">Osallistujan nimi</td>
+            </tr>
+        </table>
         </p>
 
-        <a th:href="@{/tapahtuma/{id}/edit(id=${tapahtuma.id})}">Muokkaa</a>
-        <a th:href="@{/tapahtuma/{id}/delete(id=${tapahtuma.id})}">Delete</a>
+        <a th:href="@{/tapahtuma/{id}/edit(id=${tapahtuma.id})}" sec:authorize="hasAuthority('ADMIN')">
+            Muokkaa
+        </a>
+        <a th:href="@{/tapahtuma/{id}/edit(id=${tapahtuma.id})}" sec:authorize="isAuthenticated()"
+            th:if="${#authentication.name == tapahtuma.jarjestaja.kayttajatunnus}">
+            Muokkaa
+        </a>
+
+        <a th:href="@{/tapahtuma/{id}/delete(id=${tapahtuma.id})}" sec:authorize="hasAuthority('ADMIN')">
+            Poista
+        </a>
+        <a th:href="@{/tapahtuma/{id}/delete(id=${tapahtuma.id})}" sec:authorize="isAuthenticated()"
+            th:if="${#authentication.name == tapahtuma.jarjestaja.kayttajatunnus}">
+            Poista
+        </a>
+        <br>
+        <a>Osallistu tapahtumaan</a>
     </div>
+
+    <a th:href="@{/}">Etusivulle</a>
+
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Kirjaudu ulos" />
+    </form>
 </body>
 
 </html>

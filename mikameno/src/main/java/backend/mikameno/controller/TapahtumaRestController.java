@@ -1,4 +1,4 @@
-package backend.mikameno.web;
+package backend.mikameno.controller;
 
 import java.util.Optional;
 

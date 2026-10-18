@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 
 <head>
 	<title>Mikä Meno?</title>
@@ -8,10 +8,9 @@
 
 <body>
 	<h1>Mikä Meno?</h1>
-	<p>Esittelyteksti</p>
-	<p>Kirjaudu sisään -linkki</p>
-	<p>Katso tapahtumia -linkki, joka vie /tapahtuma/{id}</p>
-	<a href="lisaaTapahtuma">Lisää tapahtuma</a>
+	<p>Täällä voit järjestää tapahtumia, selata jo luotuja tapahtumia ja ilmoittautua niille.<br>Huom! Tapahtuman järjestäminen ja ilmoittautuminen vaativat sisäänkirjautumisen!</p>
+	<a th:href="@{/login}" sec:authorize="isAnonymous()">Kirjaudu sisään</a>
+	<span sec:authorize="isAuthenticated()"><a href="lisaaTapahtuma">Lisää tapahtuma</a></span>
 
 	<div>
 		<h3>Tapahtumalistaus</h3>
@@ -25,6 +24,10 @@
 			</tr>
 		</table>
 	</div>
+
+	<form th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()">
+        <input type="submit" value="Kirjaudu ulos" />
+    </form>
 </body>
 
 </html>

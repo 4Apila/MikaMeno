@@ -75,6 +75,28 @@ public class Tapahtuma {
         this.maxOsallistujat = maxOsallistujat;
     }
 
+    //vain h2 käyttöön: järjestäjä
+    public Tapahtuma(String nimi, LocalDateTime alkupv, LocalDateTime loppupv, 
+            String paikka, String kuvaus, Integer maxOsallistujat, Kayttaja jarjestaja) {
+        this.nimi = nimi;
+        this.alkupv = alkupv;
+        this.loppupv = loppupv;
+        this.paikka = paikka;
+        this.kuvaus = kuvaus;
+        this.maxOsallistujat = maxOsallistujat;
+        this.jarjestaja = jarjestaja;
+    }
+    //vain h2 käyttöön: ei max-osallistujia, järjestäjä
+    public Tapahtuma(String nimi, LocalDateTime alkupv, LocalDateTime loppupv, 
+            String paikka, String kuvaus, Kayttaja jarjestaja) {
+        this.nimi = nimi;
+        this.alkupv = alkupv;
+        this.loppupv = loppupv;
+        this.paikka = paikka;
+        this.kuvaus = kuvaus;
+        this.jarjestaja = jarjestaja;
+    }
+
     public Long getId() {
         return id;
     }
