@@ -39,6 +39,8 @@ public class MikamenoApplication {
 			tr.save(new Tapahtuma("Kirjamessut",LocalDateTime.parse("2026-11-23T10:00:00"),LocalDateTime.parse("2026-11-25T21:00:00"),"Messukeskus","Helsingin kirjamessut", kr.findByKayttajatunnus("antti")));
 			tr.save(new Tapahtuma("Kirjakerho: viides vuodenaika",LocalDateTime.parse("2026-12-02T18:15:00"),LocalDateTime.parse("2026-12-02T21:15:00"),"Köydenpunojankatu","Keskustelua kirjasta Viides vuodenaika. Kirjailija N. K. Jemisin",8, kr.findByKayttajatunnus("lera")));
 			tr.save(new Tapahtuma("Piparileivonnaiset",LocalDateTime.parse("2026-12-06T10:00:00"),LocalDateTime.parse("2026-12-06T18:00:00"),"Aapelinkatu","Perinteinen piparkakkuleivonta. OPM eli oma purkki mukaan!",10, kr.findByKayttajatunnus("miro")));
+			tr.save(new Tapahtuma("City of Dreams",LocalDateTime.parse("2026-10-26T18:15:00"),LocalDateTime.parse("2026-10-26T21:00:00"),"Aapelinkatu","Session #51: Let the sleeping dragon lie ",7, kr.findByKayttajatunnus("miro")));
+			tr.save(new Tapahtuma("City of Dreams ANNIVERSARY",LocalDateTime.parse("2026-11-07T17:10:00"),LocalDateTime.parse("2026-11-08T02:00:00"),"Ilmoitetaan myöhemmin","Session #52: The Anniversary Edition",8, kr.findByKayttajatunnus("miro")));
 		};
 	}
 

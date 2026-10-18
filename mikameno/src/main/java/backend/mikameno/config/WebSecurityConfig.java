@@ -29,11 +29,14 @@ public class WebSecurityConfig {
 						.requestMatchers("/css/**").permitAll()
 						.requestMatchers("/tapahtuma/*").permitAll()
 						.requestMatchers(HttpMethod.GET, "/api/tapahtumat").permitAll()
+						.requestMatchers("/h2-console/**").permitAll()
 						.anyRequest().authenticated())
 				.formLogin(formlogin -> formlogin
 						//.loginPage("/login") vain jos on oma login-sivu
 						.defaultSuccessUrl("/", true)
 						.permitAll())
+				.headers(headers -> headers.frameOptions(frameOptions -> frameOptions
+                                                .disable())) // h2-console
 				.logout(logout -> logout
 						.permitAll());
 
