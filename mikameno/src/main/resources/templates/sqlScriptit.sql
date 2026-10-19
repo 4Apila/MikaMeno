@@ -73,6 +73,19 @@ CREATE TABLE tapahtuma_osallistujat (
         REFERENCES kayttaja(kayttajatunnus)
 );
 
+INSERT INTO tapahtuma_osallistujat
+    (tapahtuma_id, osallistujat_kayttajatunnus)
+VALUES
+    (1, 'johanna'),
+    (1, 'miro'),
+    (1, 'antti'),
+    (1, 'lera'),
+    (1, 'bardia'),
+    (5, 'johanna'),
+    (5, 'miro'),
+    (2, 'admin'),
+    (2, 'user');
+
 -- Testihaut
 SELECT * FROM kayttaja;
 SELECT * FROM tapahtuma;
