@@ -33,7 +33,7 @@
         <p>
             Osallistujat:
         <table>
-            <tr th:each="osallistuja: ${tapahtuma.Osallistujat}">
+            <tr th:each="osallistuja: ${tapahtuma.osallistujat}">
                 <td th:text="${osallistuja.kayttajatunnus}">Osallistujan nimi</td>
             </tr>
         </table>
@@ -55,12 +55,23 @@
             Poista
         </a>
         <br>
-        <a>Osallistu tapahtumaan</a>
+        <form th:if="${kirjautunut and !onOsallistuja}" th:action="@{/tapahtuma/{id}/osallistu(id=${tapahtuma.id})}"
+            method="post">
+            <button type="submit">Osallistu tapahtumaan</button>
+        </form>
+
+        <p th:if="${onOsallistuja}">
+            Olet ilmoittautunut tähän tapahtumaan.
+        </p>
+
+        <p th:if="${!kirjautunut}">
+            Kirjaudu sisään osallistuaksesi tapahtumaan.
+        </p>
     </div>
 
     <a th:href="@{/}">Etusivulle</a>
 
-    <form th:action="@{/logout}" method="post">
+    <form th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()">
         <input type="submit" value="Kirjaudu ulos" />
     </form>
 </body>

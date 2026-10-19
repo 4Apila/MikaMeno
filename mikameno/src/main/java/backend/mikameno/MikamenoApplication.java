@@ -1,16 +1,7 @@
 package backend.mikameno;
 
-import java.time.LocalDateTime;
-
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-
-import backend.mikameno.model.Kayttaja;
-import backend.mikameno.model.Tapahtuma;
-import backend.mikameno.repository.KayttajaRepository;
-import backend.mikameno.repository.TapahtumaRepository;
 
 @SpringBootApplication
 public class MikamenoApplication {
@@ -19,7 +10,7 @@ public class MikamenoApplication {
 		SpringApplication.run(MikamenoApplication.class, args);
 	}
 
-	@Bean
+	/* @Bean
 	public CommandLineRunner kovakoodi(TapahtumaRepository tr, KayttajaRepository kr) {
 		return (args) -> {
 
@@ -42,6 +33,6 @@ public class MikamenoApplication {
 			tr.save(new Tapahtuma("City of Dreams",LocalDateTime.parse("2026-10-26T18:15:00"),LocalDateTime.parse("2026-10-26T21:00:00"),"Aapelinkatu","Session #51: Let the sleeping dragon lie ",7, kr.findByKayttajatunnus("miro")));
 			tr.save(new Tapahtuma("City of Dreams ANNIVERSARY",LocalDateTime.parse("2026-11-07T17:10:00"),LocalDateTime.parse("2026-11-08T02:00:00"),"Ilmoitetaan myöhemmin","Session #52: The Anniversary Edition",8, kr.findByKayttajatunnus("miro")));
 		};
-	}
+	} */
 
 }
