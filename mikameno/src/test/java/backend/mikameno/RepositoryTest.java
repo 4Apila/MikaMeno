@@ -84,27 +84,30 @@ public class RepositoryTest {
         assertThat(loydetty).isNull();
     }
 
-/*     @Test
+    @Test
     public void findTapahtumatByJarjestajaToimii() {
         Kayttaja uusiKayttaja = new Kayttaja("testaaja", "testaaja", "USER");
         kr.save(uusiKayttaja);
 
-        Tapahtuma uusiTapahtuma = new Tapahtuma("Testi", LocalDateTime.parse("2042-01-30T00:00:00"),
-                LocalDateTime.parse("2042-01-31T23:59:00"), "VsCode", "Tapahtuma Repository-testien testaamiseen");
+        Tapahtuma uusiTapahtuma = new Tapahtuma("Testi", LocalDateTime.parse("2042-01-30T00:00:00"), LocalDateTime.parse("2042-01-31T23:59:00"), "VsCode", "Tapahtuma Repository-testien testaamiseen");
         uusiTapahtuma.setJarjestaja(uusiKayttaja);
         tr.save(uusiTapahtuma);
 
-        List<Tapahtuma> tapahtumat = tr.findByJarjestaja(uusiKayttaja); TÄSSÄ KÄY VIRHE
+        List<Tapahtuma> tapahtumat = tr.findByJarjestaja(uusiKayttaja);
 
         assertThat(tapahtumat).hasSize(1);
         assertThat(tapahtumat.get(0).getJarjestaja()
                 .getKayttajatunnus()).isEqualTo("testaaja");
 
-        Tapahtuma uusiTapahtuma2 = new Tapahtuma("Testi", LocalDateTime.parse("2042-01-30T00:00:00"),
-                LocalDateTime.parse("2042-01-31T23:59:00"), "VsCode", "Tapahtuma Repository-testien testaamiseen");
+        Tapahtuma uusiTapahtuma2 = new Tapahtuma("Testi2", LocalDateTime.parse("2042-01-30T00:00:00"), LocalDateTime.parse("2042-01-31T23:59:00"), "VsCode2", "Tapahtuma Repository-testien testaamiseen");
         uusiTapahtuma2.setJarjestaja(uusiKayttaja);
-        tr.save(uusiTapahtuma);
+        tr.save(uusiTapahtuma2);
 
-    } */
+        tapahtumat = tr.findByJarjestaja(uusiKayttaja);
+
+        assertThat(tapahtumat).hasSize(2);
+        assertThat(tapahtumat.get(0).getJarjestaja()
+                .getKayttajatunnus()).isEqualTo("testaaja");
+    }
 
 }

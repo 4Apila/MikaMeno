@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.server.ResponseStatusException;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 
 @Controller
@@ -56,7 +55,18 @@ public class TapahtumaController {
     @GetMapping("/tapahtuma/{id}")
     public String listaaTapahtuma(@PathVariable("id") Long id, Model model, Authentication authentication) {
         Tapahtuma tapahtuma = tr.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+
+        boolean onOsallistuja = false;
+        boolean kirjautunut = authentication != null
+                && !authentication.getName().equals("anonymousUser");
+        if (kirjautunut) {
+            onOsallistuja = tapahtuma.sisaltaaOsallistujan(
+                    authentication.getName());
+        }
+
         model.addAttribute("tapahtuma", tapahtuma);
+        model.addAttribute("onOsallistuja", onOsallistuja);
+        model.addAttribute("kirjautunut", kirjautunut);
         return "listaaTapahtuma";
     }
 
@@ -82,7 +92,7 @@ public class TapahtumaController {
         }
         Tapahtuma muokattava = tr.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
-        if (!voiMuokata(tapahtuma, authentication)) {
+        if (!voiMuokata(muokattava, authentication)) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN);
         }
         muokattava.setNimi(tapahtuma.getNimi());
@@ -106,7 +116,7 @@ public class TapahtumaController {
         if (!voiMuokata(tapahtuma, authentication)) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN);
         }
-        
+
         tr.deleteById(id);
         return "redirect:/";
     }
@@ -124,6 +134,26 @@ public class TapahtumaController {
                         .equals(tapahtuma.getJarjestaja().getKayttajatunnus());
 
         return onAdmin || onJarjestaja;
+    }
+
+    @PostMapping("/tapahtuma/{id}/osallistu")
+    public String osallistuTapahtumaan(@PathVariable("id") Long id, Authentication authentication) {
+        if (authentication == null
+                || authentication.getName().equals("anonymousUser")) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+        }
+
+        Tapahtuma tapahtuma = tr.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        Kayttaja kayttaja = kr.findByKayttajatunnus(authentication.getName());
+        if (kayttaja == null) {
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN);
+        }
+        if (!tapahtuma.sisaltaaOsallistujan(kayttaja.getKayttajatunnus())) {
+            tapahtuma.getOsallistujat().add(kayttaja);
+            tr.save(tapahtuma);
+        }
+
+        return "redirect:/tapahtuma/" + id;
     }
 
 }
